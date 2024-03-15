@@ -2,6 +2,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -11,7 +12,7 @@
       android:theme="@style/AppTheme">
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyBGA6GhdANOFz3ZrW9lTIrDN7PbbDVOdWE"/>
+        android:value="${GMAPI_KEY}"/>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
