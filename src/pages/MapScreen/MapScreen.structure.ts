@@ -1,3 +1,5 @@
+import {ImageURISource} from 'react-native';
+
 export interface ICurrentCoordinates {
   latitude: number;
   longitude: number;
@@ -11,5 +13,5 @@ export interface IVehiclePosition {
 }
 
 export interface IRenderMarkerImageHashMap {
-  [key: string]: React.ReactNode;
+  [key: string]: ImageURISource;
 }
