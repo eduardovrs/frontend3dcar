@@ -6,7 +6,6 @@
 
 <div align="center">
 
-![TypeScript](https://img.shields.io/badge/typescript%20-%23007ACC.svg?&style=for-the-badge&logo=typescript&logoColor=white)
 ![ReactNative](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 </div>
@@ -48,6 +47,24 @@ $ yarn start
 ```sh
 $ yarn android
 ```
+
+# **Technologies**
+
+[TypeScript](https://www.typescriptlang.org/docs/)
+
+[NativeWind](https://www.nativewind.dev/)
+
+[React Native Config](https://github.com/lugg/react-native-config)
+
+[React Native Maps](https://github.com/react-native-maps/react-native-maps)
+
+[React Native Maps](https://github.com/react-native-maps/react-native-maps)
+
+[React Native Navigation](https://reactnavigation.org/docs/getting-started/)
+
+[i18next](https://www.i18next.com/)
+
+[React-i18next](https://github.com/i18next/react-i18next)
 
 # Author
 
