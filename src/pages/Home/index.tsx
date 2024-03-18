@@ -9,21 +9,29 @@ import {
   View,
 } from 'react-native';
 
+import '../../utils/i18n/index';
+
+import {useTranslation} from 'react-i18next';
+
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {gps_data} from '../../utils/gps_data';
 import {useNavigation} from '@react-navigation/native';
 import {shortenAddress} from '../../utils/string';
 
 function Home(): React.JSX.Element {
+  const {t, i18n} = useTranslation('translation');
   const navigation = useNavigation();
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
   const courses = gps_data.courses;
   const [courseInfo, setCourseInfo] = React.useState();
   const [selectedCourse, setSelectedCourse] = React.useState();
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
 
   const getCourses = React.useCallback(() => {
     const separateCourseInfo = courses.map(course => {
@@ -65,12 +73,28 @@ function Home(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
+      <TouchableOpacity
+        className="w-[8%] h-[3%] bg-black self-start left-3 top-3"
+        onPress={() => changeLanguage('pt')}>
+        <Image
+          className="object-cover object-center w-full h-full"
+          source={require('../../assets/flag-brazil.jpg')}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="w-[8%] h-[3%] bg-black self-start left-3 top-5"
+        onPress={() => changeLanguage('en')}>
+        <Image
+          className="object-cover object-center w-full h-full"
+          source={require('../../assets/flag-en.png')}
+        />
+      </TouchableOpacity>
       <Image
         className="w-[50%] h-[20%] mt-5"
         source={require('../../assets/logo.png')}
       />
       <Text className="text-lg font-bold text-md text-black mt-10 mb-8">
-        Selecione um trajeto
+        {t('Selecione um trajeto')}
       </Text>
       <FlatList
         data={courseInfo}
@@ -95,7 +119,7 @@ function Home(): React.JSX.Element {
               }}>
               <View className="w-[80%] flex-row mb-3 justify-start ">
                 <Text className="text-base text-black font-bold self-start">
-                  Partida:{'  '}
+                  {t('Partida')}:{'  '}
                 </Text>
                 <Text className="text-base text-black self-start">
                   {item.initialAddress.street}
@@ -103,7 +127,7 @@ function Home(): React.JSX.Element {
               </View>
               <View className="w-[80%] flex-row justify-start mb-3">
                 <Text className="text-base text-black font-bold self-start">
-                  Destino:{'  '}
+                  {t('Destino')}:{'  '}
                 </Text>
                 <Text className="text-base text-black self-start">
                   {item.finalAddress.street}
