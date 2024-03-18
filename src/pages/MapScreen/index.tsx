@@ -23,14 +23,16 @@ export default function MapScreen({route}) {
     React.useState<string>('');
 
   const RenderMarkerImageHashmap: IRenderMarkerImageHashMap = {
-    N: <Image source={require('../../assets/vehicle-south.png')} />,
-    NE: <Image source={require('../../assets/vehicle-se.png')} />,
-    NW: <Image source={require('../../assets/vehicle-sw.png')} />,
-    S: <Image source={require('../../assets/vehicle-north.png')} />,
-    SE: <Image source={require('../../assets/vehicle-ne.png')} />,
-    SW: <Image source={require('../../assets/vehicle-nw.png')} />,
-    E: <Image source={require('../../assets/vehicle-east.png')} />,
-    W: <Image source={require('../../assets/vehicle-west.png')} />,
+    N: require('../../assets/vehicle-south.png'),
+
+    NE: require('../../assets/vehicle-se.png'),
+
+    NW: require('../../assets/vehicle-sw.png'),
+    S: require('../../assets/vehicle-north.png'),
+    SE: require('../../assets/vehicle-ne.png'),
+    SW: require('../../assets/vehicle-nw.png'),
+    E: require('../../assets/vehicle-east.png'),
+    W: require('../../assets/vehicle-west.png'),
   };
 
   function vehicleCompassPosition({
@@ -64,7 +66,7 @@ export default function MapScreen({route}) {
         longitude: presentCoordinates.longitude,
       });
       setCurrentIteractionIndex(prev => prev + 1);
-    }, 1000);
+    }, 1500);
     return () => clearInterval(interval);
   }, [currentCoordinates, currentIteractionIndex, data.gps]);
 
@@ -125,9 +127,11 @@ export default function MapScreen({route}) {
           strokeColor="#000"
           strokeWidth={6}
         />
-        <Marker coordinate={currentCoordinates}>
-          {RenderMarkerImageHashmap[currentCompassPosition]}
-        </Marker>
+        <Marker
+          image={RenderMarkerImageHashmap[currentCompassPosition]}
+          className="w-12 h-12"
+          coordinate={currentCoordinates}
+        />
         <Marker
           coordinate={{
             latitude: data.finalAddress.latitude,
