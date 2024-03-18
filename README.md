@@ -58,8 +58,6 @@ $ yarn android
 
 [React Native Maps](https://github.com/react-native-maps/react-native-maps)
 
-[React Native Maps](https://github.com/react-native-maps/react-native-maps)
-
 [React Native Navigation](https://reactnavigation.org/docs/getting-started/)
 
 [i18next](https://www.i18next.com/)
