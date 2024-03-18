@@ -17,6 +17,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {gps_data} from '../../utils/gps_data';
 import {useNavigation} from '@react-navigation/native';
 import {shortenAddress} from '../../utils/string';
+import RouteInfo from '../../components/RouteInfo';
 
 function Home(): React.JSX.Element {
   const {t, i18n} = useTranslation('translation');
@@ -94,7 +95,7 @@ function Home(): React.JSX.Element {
         source={require('../../assets/logo.png')}
       />
       <Text className="text-lg font-bold text-md text-black mt-10 mb-8">
-        {t('Selecione um trajeto')}
+        {t('Selecione um trajeto')}:
       </Text>
       <FlatList
         data={courseInfo}
@@ -117,22 +118,10 @@ function Home(): React.JSX.Element {
                   gps: item.gps,
                 });
               }}>
-              <View className="w-[80%] flex-row mb-3 justify-start ">
-                <Text className="text-base text-black font-bold self-start">
-                  {t('Partida')}:{'  '}
-                </Text>
-                <Text className="text-base text-black self-start">
-                  {item.initialAddress.street}
-                </Text>
-              </View>
-              <View className="w-[80%] flex-row justify-start mb-3">
-                <Text className="text-base text-black font-bold self-start">
-                  {t('Destino')}:{'  '}
-                </Text>
-                <Text className="text-base text-black self-start">
-                  {item.finalAddress.street}
-                </Text>
-              </View>
+              <RouteInfo
+                initialAddress={item.initialAddress.street}
+                finalAddress={item.finalAddress.street}
+              />
             </TouchableOpacity>
           );
         }}
