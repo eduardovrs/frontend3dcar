@@ -1,5 +1,5 @@
-export const shortenAddress = (address: string) => {
-  const parts = address.split(',');
+export const shortenAddress = (address = '') => {
+  const parts = address?.split(',');
 
   const street = parts[0].trim();
   const neighborhood = parts[1].trim();
