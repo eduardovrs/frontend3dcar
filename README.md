@@ -1,79 +1,67 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<p align="center">
+  <a rel="noopener" target="_blank"><img width="300" src="./src/assets/logo.png" alt="Frontend 3D Car"></a>
+</p>
 
-# Getting Started
+**Fronend 3D Car** is an app that allows users to select a pre-determined route and view it on a map, with it's starting and ending point, while a vehicle travels along the route. It is also possible to change the app language from portuguese to english.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+<div align="center">
 
-## Step 1: Start the Metro Server
+![ReactNative](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+</div>
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## **Installation**
 
-```bash
-# using npm
-npm start
+### First run the command git clone
 
-# OR using Yarn
-yarn start
+<br>
+
+**HTTPS:**
+
+```sh
+$ git clone https://github.com/eduardovrs/frontend3dcar.git
 ```
 
-## Step 2: Start your Application
+**SSH:**
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```sh
+$ git clone git@github.com:eduardovrs/frontend3dcar.git
 ```
 
-### For iOS
+**Go to the folder and run the command yarn to install all the dependencies**
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```sh
+$ cd frontend3dcar && yarn
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## **Builds**
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+To run the project you can run the following command:
 
-## Step 3: Modifying your App
+```sh
+$ yarn start
+```
 
-Now that you have successfully run the app, let's modify it.
+### **Android**
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+```sh
+$ yarn android
+```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+# **Technologies**
 
-## Congratulations! :tada:
+[TypeScript](https://www.typescriptlang.org/docs/) - In my opinion TS makes the coding experience a lot easier since it enhances code maintainability by explicitly defining data types and that's why I use it in the great majority of my projects.
 
-You've successfully run and modified your React Native App. :partying_face:
+[NativeWind](https://www.nativewind.dev/) - In this project I particularly chose to use NativeWind to try it out for the very first time and I'm very pleased with it's usability. NativeWind definitely makes styling easier in React Native.
 
-### Now what?
+[React Native Config](https://github.com/lugg/react-native-config) - RN Config is being used in this project to allow the google api key variable to be used in build.gradle file.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+[React Native Maps](https://github.com/react-native-maps/react-native-maps) - RN Maps was the suggested map library to be used.
 
-# Troubleshooting
+[React Native Navigation](https://reactnavigation.org/docs/getting-started/) - RN Navigation is the library that I mainly use in my projects to navigate through screens and it applies optimizations to screen components to prevent unnecessary renders.
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+[i18next](https://www.i18next.com/) - I used i18n for internationalization beacause it's the best library that I know for that purpose.
 
-# Learn More
+# Author
 
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [Eduardo Vinícius](https://github.com/eduardovrs) (edu.vinirodrigues@gmail.com)
