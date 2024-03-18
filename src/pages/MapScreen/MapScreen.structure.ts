@@ -10,6 +10,6 @@ export interface IVehiclePosition {
   longitudeFinal: number;
 }
 
-export interface IRenderVehicleImage {
+export interface IRenderMarkerImageHashMap {
   [key: string]: React.ReactNode;
 }
