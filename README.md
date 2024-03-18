@@ -50,19 +50,17 @@ $ yarn android
 
 # **Technologies**
 
-[TypeScript](https://www.typescriptlang.org/docs/)
+[TypeScript](https://www.typescriptlang.org/docs/) - In my opinion TS makes the coding experience a lot easier since it enhances code maintainability by explicitly defining data types and that's why I use it in the great majority of my projects.
 
-[NativeWind](https://www.nativewind.dev/)
+[NativeWind](https://www.nativewind.dev/) - In this project I particularly chose to use NativeWind to try it out for the very first time and I'm very pleased with it's usability. NativeWind definitely makes styling easier in React Native.
 
-[React Native Config](https://github.com/lugg/react-native-config)
+[React Native Config](https://github.com/lugg/react-native-config) - RN Config is being used in this project to allow the google api key variable to be used in build.gradle file.
 
-[React Native Maps](https://github.com/react-native-maps/react-native-maps)
+[React Native Maps](https://github.com/react-native-maps/react-native-maps) - RN Maps was the suggested map library to be used.
 
-[React Native Navigation](https://reactnavigation.org/docs/getting-started/)
+[React Native Navigation](https://reactnavigation.org/docs/getting-started/) - RN Navigation is the library that I mainly use in my projects to navigate through screens and it applies optimizations to screen components to prevent unnecessary renders.
 
-[i18next](https://www.i18next.com/)
-
-[React-i18next](https://github.com/i18next/react-i18next)
+[i18next](https://www.i18next.com/) - I used i18n for internationalization beacause it's the best library that I know for that purpose.
 
 # Author
 
