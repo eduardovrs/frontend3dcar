@@ -1,16 +1,96 @@
 import {useNavigation} from '@react-navigation/native';
-import {styled} from 'nativewind';
 import React, {useRef} from 'react';
-import {View, Dimensions, Text, TouchableOpacity, Image} from 'react-native';
-import Config from 'react-native-config';
-import MapView, {Marker} from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
+import {View, TouchableOpacity, Image} from 'react-native';
+import MapView, {Marker, Polyline} from 'react-native-maps';
+import {
+  ICurrentCoordinates,
+  IRenderMarkerImageHashMap,
+  IVehiclePosition,
+} from './MapScreen.structure';
 
 export default function MapScreen({route}) {
   const navigation = useNavigation();
   const mapRef = useRef();
   const data = route?.params;
-  const {width, height} = Dimensions.get('window');
+  const [currentCoordinates, setCurrentCoordinates] =
+    React.useState<ICurrentCoordinates>({
+      latitude: data.initialAddress.latitude,
+      longitude: data.initialAddress.longitude,
+    });
+  const [currentIteractionIndex, setCurrentIteractionIndex] = React.useState(0);
+  const [completeRoute, setCompleteRoute] = React.useState([]);
+  const [currentCompassPosition, setCurrentCompassPosition] =
+    React.useState<string>('');
+
+  const RenderMarkerImageHashmap: IRenderMarkerImageHashMap = {
+    N: <Image source={require('../../assets/vehicle-south.png')} />,
+    NE: <Image source={require('../../assets/vehicle-se.png')} />,
+    NW: <Image source={require('../../assets/vehicle-sw.png')} />,
+    S: <Image source={require('../../assets/vehicle-north.png')} />,
+    SE: <Image source={require('../../assets/vehicle-ne.png')} />,
+    SW: <Image source={require('../../assets/vehicle-nw.png')} />,
+    E: <Image source={require('../../assets/vehicle-east.png')} />,
+    W: <Image source={require('../../assets/vehicle-west.png')} />,
+  };
+
+  function vehicleCompassPosition({
+    latitudeInicial,
+    longitudeInicial,
+    latitudeFinal,
+    longitudeFinal,
+  }: IVehiclePosition) {
+    const radians = Math.atan2(
+      longitudeFinal - longitudeInicial,
+      latitudeFinal - latitudeInicial,
+    );
+
+    const compassReading = radians * (180 / Math.PI);
+
+    const coordNames = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N'];
+    let coordIndex = Math.round(compassReading / 45);
+    if (coordIndex < 0) {
+      coordIndex = coordIndex + 8;
+    }
+    return setCurrentCompassPosition(coordNames[coordIndex]);
+  }
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const presentCoordinates: ICurrentCoordinates =
+        data.gps[currentIteractionIndex];
+      if (!presentCoordinates) return;
+      setCurrentCoordinates({
+        latitude: presentCoordinates.latitude,
+        longitude: presentCoordinates.longitude,
+      });
+      setCurrentIteractionIndex(prev => prev + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [currentCoordinates, currentIteractionIndex, data.gps]);
+
+  React.useEffect(() => {
+    const getCompleteRoute = data.gps.map(item => {
+      return {
+        latitude: item.latitude,
+        longitude: item.longitude,
+      };
+    });
+    setCompleteRoute(getCompleteRoute);
+  }, [data.gps]);
+
+  React.useEffect(() => {
+    vehicleCompassPosition({
+      latitudeInicial: currentCoordinates.latitude,
+      longitudeInicial: currentCoordinates.longitude,
+      latitudeFinal: data.initialAddress.latitude,
+      longitudeFinal: data.initialAddress.longitude,
+    });
+  }, [
+    currentCoordinates.latitude,
+    currentCoordinates.longitude,
+    data.initialAddress.latitude,
+    data.initialAddress.longitude,
+  ]);
 
   return (
     <View className="flex-1 items-center justify-center bg-white">
@@ -21,8 +101,18 @@ export default function MapScreen({route}) {
       </View>
       <MapView
         ref={mapRef}
+        onRegionChange={() => {
+          mapRef.current?.animateToRegion({
+            latitude: currentCoordinates.latitude,
+            longitude: currentCoordinates.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          });
+        }}
         showsUserLocation={true}
         showsMyLocationButton={true}
+        showsCompass={true}
+        rotateEnabled={false}
         className="flex-1 w-full h-full z-0"
         initialRegion={{
           latitude: data.initialAddress.latitude,
@@ -30,36 +120,13 @@ export default function MapScreen({route}) {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}>
-        <MapViewDirections
-          origin={{
-            latitude: data.initialAddress.latitude,
-            longitude: data.initialAddress.longitude,
-          }}
-          destination={{
-            latitude: data.finalAddress.latitude,
-            longitude: data.finalAddress.longitude,
-          }}
-          apikey={Config.GMAPI_KEY}
-          strokeWidth={4}
-          mode="DRIVING"
-          optimizeWaypoints
-          onReady={result => {
-            mapRef.current?.fitToCoordinates(result.coordinates, {
-              edgePadding: {
-                right: width / 20,
-                bottom: height / 20,
-                left: width / 20,
-                top: height / 20,
-              },
-            });
-          }}
+        <Polyline
+          coordinates={completeRoute}
+          strokeColor="#000"
+          strokeWidth={6}
         />
-        <Marker
-          coordinate={{
-            latitude: data.initialAddress.latitude,
-            longitude: data.initialAddress.longitude,
-          }}>
-          <Image source={require('../../assets/vehicle.png')} />
+        <Marker coordinate={currentCoordinates}>
+          {RenderMarkerImageHashmap[currentCompassPosition]}
         </Marker>
         <Marker
           coordinate={{
